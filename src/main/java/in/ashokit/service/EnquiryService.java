@@ -6,7 +6,7 @@ import in.ashokit.dto.DashboardResponseDTO;
 import in.ashokit.dto.EnqFilterDTO;
 import in.ashokit.dto.EnquiryDTO;
 
-public interface EnquriyService {
+public interface EnquiryService {
 
 	public DashboardResponseDTO getDashboardInfo(Integer counsellorId);
 

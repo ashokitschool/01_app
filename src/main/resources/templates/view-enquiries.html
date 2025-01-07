@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Ashok IT - View Enquiries</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<div class="container-fluid">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="dashboard">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="enquiry-page">Add Enquiry</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="view-enquiries">View Enquiries</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="logout">Logout</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+
+		<h1>View Enquiries Here</h1>
+
+		<form th:action="@{/filter-enquiries}" th:object="${filterDTO}" method="post">
+
+			<table>
+				<tr>
+					<td>Class Mode:</td>
+					<td>
+						<select th:field="*{classMode}">
+							<option value="">-Select-</option>
+							<option value="Classroom">Classroom</option>
+							<option value="Online">Online</option>
+						</select>
+					</td>
+					<td>Course:</td>
+					<td>
+						<select th:field="*{course}">
+							<option value="">-Select-</option>
+							<option value="Java">Java</option>
+							<option value="Python">Python</option>
+							<option value="DevOps">DevOps</option>
+							<option value="AWS">AWS</option>
+						</select>
+					</td>
+					<td>Status:</td>
+					<td>
+						<select th:field="*{enqStatus}">
+							<option value="">-Select-</option>
+							<option value="Open">Open</option>
+							<option value="Enrolled">Enrolled</option>
+							<option value="Lost">Lost</option>
+						</select>
+					</td>
+					<td>
+						<input type="submit" value="Filter" class="btn btn-primary">
+					</td>
+				</tr>
+			</table>
+
+		</form>
+
+		<table class="table table-bordered table-striped">
+
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Phno</th>
+					<th>Course</th>
+					<th>Class Mode</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="enq: ${enquiries}">
+					<td th:text="${enq.stuName}"></td>
+					<td th:text="${enq.stuPhno}"></td>
+					<td th:text="${enq.classMode}"></td>
+					<td th:text="${enq.course}"></td>
+					<td th:text="${enq.enqStatus}"></td>
+					<td>
+						<a th:href="@{/edit-enquiry(enqId=${enq.enqId})}"> Edit </a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>
